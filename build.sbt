@@ -1,8 +1,8 @@
 name := "binders-typesafe-config"
 
-version := "0.12"
+version := "0.13-SNAPSHOT"
 
-organization := "eu.inn"
+organization := "com.hypertino"
 
 scalaVersion := "2.11.8"
 
@@ -14,9 +14,9 @@ resolvers ++= Seq(
 
 libraryDependencies ++= Seq(
   "com.typesafe" % "config" % "1.2.1",
-  "eu.inn" %% "binders-core" % "0.12.93",
-  "org.scalatest" %% "scalatest" % "2.2.6" % "test",
-  "org.mockito" % "mockito-all" % "1.10.19" % "test"
+  "com.hypertino" %% "binders" % "1.0-SNAPSHOT",
+  "org.scalatest" %% "scalatest" % "3.0.0" % "test",
+  "com.hypertino" %% "scalamock-scalatest-support" % "3.4-SNAPSHOT" % "test"
 )
 
 libraryDependencies := {
@@ -31,3 +31,61 @@ libraryDependencies := {
         "org.scalamacros" %% "quasiquotes" % "2.1.0" cross CrossVersion.binary)
   }
 }
+
+// Sonatype repositary publish options
+publishMavenStyle := true
+
+publishTo := {
+  val nexus = "https://oss.sonatype.org/"
+  if (isSnapshot.value)
+    Some("snapshots" at nexus + "content/repositories/snapshots")
+  else
+    Some("releases" at nexus + "service/local/staging/deploy/maven2")
+}
+
+publishArtifact in Test := false
+
+pomIncludeRepository := { _ => false}
+
+pomExtra :=
+  <url>https://github.com/hypertino/typesafe-config-binders</url>
+    <licenses>
+      <license>
+        <name>BSD-style</name>
+        <url>http://opensource.org/licenses/BSD-3-Clause</url>
+        <distribution>repo</distribution>
+      </license>
+    </licenses>
+    <scm>
+      <url>git@github.com:hypertino/typesafe-config-binders.git</url>
+      <connection>scm:git:git@github.com:hypertino/typesafe-config-binders.git</connection>
+    </scm>
+    <developers>
+      <developer>
+        <id>maqdev</id>
+        <name>Magomed Abdurakhmanov</name>
+        <url>https://github.com/maqdev</url>
+      </developer>
+      <developer>
+        <id>hypertino</id>
+        <name>Hypertino</name>
+        <url>https://github.com/hypertino</url>
+      </developer>
+    </developers>
+
+// Sonatype credentials
+
+credentials ++= (for {
+  username <- Option(System.getenv().get("sonatype_username"))
+  password <- Option(System.getenv().get("sonatype_password"))
+} yield Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", username, password)).toSeq
+
+// pgp keys and credentials
+
+pgpSecretRing := file("./travis/ht-oss-private.asc")
+
+pgpPublicRing := file("./travis/ht-oss-public.asc")
+
+usePgpKeyHex("F8CDEF49B0EDEDCC")
+
+pgpPassphrase := Option(System.getenv().get("oss_gpg_passphrase")).map(_.toCharArray)

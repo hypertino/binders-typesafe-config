@@ -1,10 +1,9 @@
-package eu.inn.binders.tconfig.internal
+package com.hypertino.binders.tconfig.internal
 
-import java.io.OutputStream
-
+import com.hypertino.binders.util.MacroAdapter
+import MacroAdapter.Context
 import scala.language.experimental.macros
 import scala.language.reflectiveCalls
-import scala.reflect.macros.Context
 
 private [tconfig] object ConfigMacro {
   def read[O: c.WeakTypeTag]
@@ -12,7 +11,7 @@ private [tconfig] object ConfigMacro {
     (path: c.Expr[String]): c.Expr[O] = {
     val c0: c.type = c
     val bundle = new {
-      val c: c0.type = c0
+      val ctx: c0.type = c0
     } with ConfigMacroImpl
     c.Expr[O](bundle.read[O](path))
   }
@@ -21,7 +20,7 @@ private [tconfig] object ConfigMacro {
   (c: Context): c.Expr[O] = {
     val c0: c.type = c
     val bundle = new {
-      val c: c0.type = c0
+      val ctx: c0.type = c0
     } with ConfigMacroImpl
     c.Expr[O](bundle.readValue[O])
   }

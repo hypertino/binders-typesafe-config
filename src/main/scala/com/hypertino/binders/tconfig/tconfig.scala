@@ -1,12 +1,9 @@
-package eu.inn.binders
+package com.hypertino.binders
 
-import java.io.{OutputStream, InputStream}
+import com.hypertino.binders.tconfig.internal.ConfigMacro
+import com.typesafe.config.{Config, ConfigValue}
 
-import com.typesafe.config.{ConfigValue, Config}
-import eu.inn.binders.tconfig.internal.ConfigMacro
-import eu.inn.binders.naming.{PlainConverter, Converter}
 import scala.language.experimental.macros
-import scala.reflect.runtime.universe._
 
 package object tconfig {
   implicit class ConfigReader(val config: Config) extends AnyVal{

@@ -1,9 +1,9 @@
-package eu.inn.binders.tconfig
+package com.hypertino.binders.tconfig
 
 import com.typesafe.config.{ConfigValue, ConfigValueType}
-import eu.inn.binders.core.Deserializer
-import eu.inn.binders.value.Value
-import eu.inn.binders.naming.Converter
+import com.hypertino.binders.core.Deserializer
+import com.hypertino.binders.value.Value
+import com.hypertino.inflector.naming.Converter
 
 import scala.collection.JavaConversions
 import scala.collection.mutable.ArrayBuffer
@@ -92,7 +92,7 @@ abstract class ConfigDeserializerBase[C <: Converter, I <: Deserializer[C]]
   }
 
   def readValue(): Value = {
-    import eu.inn.binders.value._
+    import com.hypertino.binders.value._
     valueType match {
       case ConfigValueType.NUMBER ⇒ Number(readBigDecimal())
       case ConfigValueType.BOOLEAN ⇒ Bool(readBoolean())

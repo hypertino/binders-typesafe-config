@@ -1,13 +1,12 @@
 
 import com.typesafe.config.ConfigFactory
-import eu.inn.binders.naming.DashCaseToCamelCaseConverter
 import org.scalatest.{FlatSpec, Matchers}
 
 case class TestString(stringVal: String)
 case class TestOptionString(stringVal: Option[String])
 
 class TestStringSerializer extends FlatSpec with Matchers {
-  import eu.inn.binders.tconfig._
+  import com.hypertino.binders.tconfig._
 
   "Config " should " deserialize class with String" in {
     val config = ConfigFactory.parseString("obj.string-val:abc")

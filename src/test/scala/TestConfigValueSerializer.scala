@@ -4,7 +4,7 @@ import org.scalatest.{FlatSpec, Matchers}
 
 
 class TestConfigValueSerializer extends FlatSpec with Matchers {
-  import eu.inn.binders.tconfig._
+  import com.hypertino.binders.tconfig._
 
   "ConfigValue " should " deserialize class with String" in {
     val config = ConfigFactory.parseString("obj.string-val:abc")
