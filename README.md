@@ -1,10 +1,10 @@
-# binders-typesafe-config
+# typesafe-config-binders
 
-[![Build Status](https://travis-ci.org/InnovaCo/binders-typesafe-config.svg?branch=master)](https://travis-ci.org/InnovaCo/binders-typesafe-config)
+[![Build Status](https://travis-ci.org/hypertino/typesafe-config-binders.svg?branch=master)](https://travis-ci.org/hypertino/typesafe-config-binders)
 
-[ Latest Releases ](https://oss.sonatype.org/#nexus-search;gav~eu.inn~binders-typesafe-config_*~~~)
+[ Latest Releases ](https://oss.sonatype.org/#nexus-search;gav~com.hypertino~typesafe-config-binders_*~~~)
 
-**binders-typesafe-config** helps to easily deserialize case classes from typesafe config
+**typesafe-config-binders** helps to easily deserialize case classes from typesafe config
 
 ## License
 
