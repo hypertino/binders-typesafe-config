@@ -1,4 +1,4 @@
-name := "binders-typesafe-config"
+name := "typesafe-config-binders"
 
 version := "0.13-SNAPSHOT"
 
