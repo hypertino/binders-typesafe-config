@@ -4,9 +4,9 @@ version := "0.13-SNAPSHOT"
 
 organization := "com.hypertino"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.1"
 
-crossScalaVersions := Seq("2.11.8", "2.10.6")
+crossScalaVersions := Seq("2.12.1", "2.11.8", "2.10.6")
 
 resolvers ++= Seq(
   Resolver.sonatypeRepo("public")
@@ -15,7 +15,6 @@ resolvers ++= Seq(
 libraryDependencies ++= Seq(
   "com.typesafe" % "config" % "1.2.1",
   "com.hypertino" %% "binders" % "1.0-SNAPSHOT",
-  "org.scalatest" %% "scalatest" % "3.0.0" % "test",
   "com.hypertino" %% "scalamock-scalatest-support" % "3.4-SNAPSHOT" % "test"
 )
 
