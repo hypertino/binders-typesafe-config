@@ -11,7 +11,7 @@ case class ObjectWithDuration(duration: Duration,
 
 class TestDurationDeserializer extends FlatSpec with Matchers {
 
-  import com.hypertino.binders.tconfig._
+  import com.hypertino.binders.config.ConfigBinders._
 
   "Config " should " deserialize class with TimeUnit and FiniteDuration" in {
     val config = ConfigFactory.parseString("""

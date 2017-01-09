@@ -8,7 +8,7 @@ case class TestStringArray(arrayOfStrings: List[String])
 case class TestObjectArray(arrayOfObjects: List[TestObject])
 
 class TestArraySerializer extends FlatSpec with Matchers {
-  import com.hypertino.binders.tconfig._
+  import com.hypertino.binders.config.ConfigBinders._
 
   "Config " should " deserialize class with List[String]" in {
     val config = ConfigFactory.parseString("obj.array-of-strings:[abc,def]")

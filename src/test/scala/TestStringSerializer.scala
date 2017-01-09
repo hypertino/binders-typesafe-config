@@ -6,7 +6,7 @@ case class TestString(stringVal: String)
 case class TestOptionString(stringVal: Option[String])
 
 class TestStringSerializer extends FlatSpec with Matchers {
-  import com.hypertino.binders.tconfig._
+  import com.hypertino.binders.config.ConfigBinders._
 
   "Config " should " deserialize class with String" in {
     val config = ConfigFactory.parseString("obj.string-val:abc")

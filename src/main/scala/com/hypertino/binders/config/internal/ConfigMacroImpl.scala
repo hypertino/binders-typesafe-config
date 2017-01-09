@@ -1,4 +1,4 @@
-package com.hypertino.binders.tconfig.internal
+package com.hypertino.binders.config.internal
 
 import com.hypertino.binders.util.MacroAdapter
 
@@ -6,7 +6,7 @@ import scala.language.experimental.macros
 import scala.language.reflectiveCalls
 import MacroAdapter.Context
 
-private [tconfig] trait ConfigMacroImpl extends MacroAdapter[Context]{
+private [config] trait ConfigMacroImpl extends MacroAdapter[Context]{
   import ctx.universe._
   def read[O: ctx.WeakTypeTag](path: ctx.Expr[String]): ctx.Tree = {
     val t = freshTerm("t")
@@ -14,7 +14,7 @@ private [tconfig] trait ConfigMacroImpl extends MacroAdapter[Context]{
     val d = freshTerm("d")
     val block = q"""{
       val $t = ${ctx.prefix.tree}
-      val $f = com.hypertino.binders.tconfig.SerializerFactory.findFactory()
+      val $f = com.hypertino.binders.config.ConfigBindersFactory.findFactory()
       val $d = $f.createDeserializer(Option($t.config.getValue($path)), Option($path))
       $d.unbind[${weakTypeOf[O]}]
     }"""
@@ -27,7 +27,7 @@ private [tconfig] trait ConfigMacroImpl extends MacroAdapter[Context]{
     val d = freshTerm("d")
     val block = q"""{
       val $t = ${ctx.prefix.tree}
-      val $f = com.hypertino.binders.tconfig.SerializerFactory.findFactory()
+      val $f = com.hypertino.binders.config.ConfigBindersFactory.findFactory()
       val $d = $f.createDeserializer(Option($t.configValue), None)
       $d.unbind[${weakTypeOf[O]}]
     }"""

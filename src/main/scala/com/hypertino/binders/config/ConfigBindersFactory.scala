@@ -1,20 +1,20 @@
-package com.hypertino.binders.tconfig
+package com.hypertino.binders.config
 
 import com.typesafe.config.ConfigValue
 import com.hypertino.binders.core.Deserializer
 import com.hypertino.inflector.naming.{CamelCaseToDashCaseConverter, Converter}
 
-trait SerializerFactory[C <: Converter, D <: Deserializer[C]] {
+trait ConfigBindersFactory[C <: Converter, D <: Deserializer[C]] {
   def createDeserializer(fieldValue: Option[ConfigValue], fieldName: Option[String]): D
 }
 
-class DefaultSerializerFactory[C <: Converter] extends SerializerFactory[C, ConfigDeserializer[C]] {
+class DefaultConfigBindersFactory[C <: Converter] extends ConfigBindersFactory[C, ConfigDeserializer[C]] {
   def createDeserializer(fieldValue: Option[ConfigValue], fieldName: Option[String]) = new ConfigDeserializer[C](fieldValue, fieldName)
 }
 
-object SerializerFactory {
-  implicit val defaultSerializerFactory = new DefaultSerializerFactory[CamelCaseToDashCaseConverter.type]
+object ConfigBindersFactory {
+  implicit val defaultSerializerFactory = new DefaultConfigBindersFactory[CamelCaseToDashCaseConverter.type]
 
   def findFactory[C <: Converter, D <: Deserializer[C]]
-    ()(implicit factory: SerializerFactory[C, D]): SerializerFactory[C, D] = factory
+    ()(implicit factory: ConfigBindersFactory[C, D]): ConfigBindersFactory[C, D] = factory
 }

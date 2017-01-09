@@ -1,11 +1,11 @@
-package com.hypertino.binders
+package com.hypertino.binders.config
 
-import com.hypertino.binders.tconfig.internal.ConfigMacro
+import com.hypertino.binders.config.internal.ConfigMacro
 import com.typesafe.config.{Config, ConfigValue}
 
 import scala.language.experimental.macros
 
-package object tconfig {
+object ConfigBinders {
   implicit class ConfigReader(val config: Config) extends AnyVal{
     def read[O](path: String): O = macro ConfigMacro.read[O]
   }

@@ -1,11 +1,11 @@
-package com.hypertino.binders.tconfig.internal
+package com.hypertino.binders.config.internal
 
 import com.hypertino.binders.util.MacroAdapter
 import MacroAdapter.Context
 import scala.language.experimental.macros
 import scala.language.reflectiveCalls
 
-private [tconfig] object ConfigMacro {
+private [config] object ConfigMacro {
   def read[O: c.WeakTypeTag]
     (c: Context)
     (path: c.Expr[String]): c.Expr[O] = {

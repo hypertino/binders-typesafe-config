@@ -1,4 +1,4 @@
-package com.hypertino.binders.tconfig
+package com.hypertino.binders.config
 
 import com.typesafe.config.{ConfigValue, ConfigValueType}
 import com.hypertino.binders.core.Deserializer
