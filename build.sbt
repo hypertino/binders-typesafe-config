@@ -15,7 +15,7 @@ resolvers ++= Seq(
 libraryDependencies ++= Seq(
   "com.typesafe" % "config" % "1.2.1",
   "com.hypertino" %% "binders" % "1.0-SNAPSHOT",
-  "com.hypertino" %% "scalamock-scalatest-support" % "3.4-SNAPSHOT" % "test"
+  "org.scalamock" %% "scalamock-scalatest-support" % "3.5.0" % "test"
 )
 
 libraryDependencies := {
