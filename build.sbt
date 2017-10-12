@@ -1,6 +1,6 @@
 name := "typesafe-config-binders"
 
-version := "0.2-SNAPSHOT"
+version := "0.2.0"
 organization := "com.hypertino"
 crossScalaVersions := Seq("2.12.3", "2.11.11", "2.10.6")
 scalaVersion := crossScalaVersions.value.head
