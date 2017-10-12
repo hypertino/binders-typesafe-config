@@ -1,11 +1,8 @@
 name := "typesafe-config-binders"
 
 version := "0.2-SNAPSHOT"
-
 organization := "com.hypertino"
-
 crossScalaVersions := Seq("2.12.3", "2.11.11", "2.10.6")
-
 scalaVersion := crossScalaVersions.value.head
 
 resolvers ++= Seq(
@@ -33,7 +30,6 @@ libraryDependencies := {
 
 // Sonatype repositary publish options
 publishMavenStyle := true
-
 publishTo := {
   val nexus = "https://oss.sonatype.org/"
   if (isSnapshot.value)
@@ -43,7 +39,6 @@ publishTo := {
 }
 
 publishArtifact in Test := false
-
 pomIncludeRepository := { _ => false}
 
 pomExtra :=
@@ -81,10 +76,7 @@ credentials ++= (for {
 
 // pgp keys and credentials
 
-pgpSecretRing := file("./travis/ht-oss-private.asc")
-
-pgpPublicRing := file("./travis/ht-oss-public.asc")
-
+pgpSecretRing := file("./travis/script/ht-oss-private.asc")
+pgpPublicRing := file("./travis/script/ht-oss-public.asc")
 usePgpKeyHex("F8CDEF49B0EDEDCC")
-
 pgpPassphrase := Option(System.getenv().get("oss_gpg_passphrase")).map(_.toCharArray)
