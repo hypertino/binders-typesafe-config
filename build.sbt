@@ -1,12 +1,12 @@
 name := "typesafe-config-binders"
 
-version := "0.13-SNAPSHOT"
+version := "0.2-SNAPSHOT"
 
 organization := "com.hypertino"
 
-scalaVersion := "2.12.1"
+crossScalaVersions := Seq("2.12.3", "2.11.11", "2.10.6")
 
-crossScalaVersions := Seq("2.12.1", "2.11.8", "2.10.6")
+scalaVersion := crossScalaVersions.value.head
 
 resolvers ++= Seq(
   Resolver.sonatypeRepo("public")
@@ -14,7 +14,7 @@ resolvers ++= Seq(
 
 libraryDependencies ++= Seq(
   "com.typesafe" % "config" % "1.2.1",
-  "com.hypertino" %% "binders" % "1.0-SNAPSHOT",
+  "com.hypertino" %% "binders" % "1.2.0",
   "org.scalamock" %% "scalamock-scalatest-support" % "3.5.0" % "test"
 )
 
