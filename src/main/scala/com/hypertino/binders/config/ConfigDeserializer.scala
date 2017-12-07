@@ -24,12 +24,12 @@ abstract class ConfigDeserializerBase[C <: Converter, I <: Deserializer[C]]
     }
   }
 
-  import JavaConversions._
-  protected def createArrayIterator: Iterator[I] = configValue.get.asInstanceOf[java.util.List[ConfigValue]].map { e ⇒
+  import scala.collection.JavaConverters._
+  protected def createArrayIterator: Iterator[I] = configValue.get.asInstanceOf[java.util.List[ConfigValue]].asScala.map { e ⇒
     createFieldDeserializer(Option(e), None)
   }.toIterator
 
-  protected def createObjectIterator: Iterator[I] = configValue.get.asInstanceOf[java.util.Map[String,ConfigValue]].map {
+  protected def createObjectIterator: Iterator[I] = configValue.get.asInstanceOf[java.util.Map[String,ConfigValue]].asScala.map {
     case (name, value) ⇒ createFieldDeserializer(Option(value), Some(name))
   }.toIterator
   
@@ -39,11 +39,13 @@ abstract class ConfigDeserializerBase[C <: Converter, I <: Deserializer[C]]
   def readString(): String = configValue.get.unwrapped().toString
   def readInt(): Int = configValue.get.unwrapped() match {
     case i: java.lang.Integer ⇒ i
+    case s: java.lang.String ⇒ s.toInt
     case _ ⇒ deserializationFailed("Int")
   }
   def readLong(): Long = configValue.get.unwrapped() match {
     case i: java.lang.Integer ⇒ i.toLong
     case l: java.lang.Long ⇒ l
+    case s: java.lang.String ⇒ s.toLong
     case _ ⇒ deserializationFailed("Long")
   }
   def readDouble(): Double = configValue.get.unwrapped() match {
@@ -51,6 +53,7 @@ abstract class ConfigDeserializerBase[C <: Converter, I <: Deserializer[C]]
     case l: java.lang.Long ⇒ l.toDouble
     case d: java.lang.Double ⇒ d
     case f: java.lang.Float ⇒ f.toDouble
+    case s: java.lang.String ⇒ s.toDouble
     case _ ⇒ deserializationFailed("Double")
   }
   def readFloat(): Float = configValue.get.unwrapped() match {
@@ -58,12 +61,14 @@ abstract class ConfigDeserializerBase[C <: Converter, I <: Deserializer[C]]
     case l: java.lang.Long ⇒ l.toFloat
     case d: java.lang.Double ⇒ d.toFloat
     case f: java.lang.Float ⇒ f
+    case s: java.lang.String ⇒ s.toFloat
     case _ ⇒ deserializationFailed("Float")
   }
   def readBoolean(): Boolean = configValue.get.unwrapped() match {
     case i: java.lang.Integer ⇒ i != 0
     case l: java.lang.Long ⇒ l != 0
     case b: java.lang.Boolean ⇒ b
+    case s: java.lang.String ⇒ s.toBoolean
     case _ ⇒ deserializationFailed("Boolean")
   }
   def readBigDecimal(): BigDecimal = configValue.get.unwrapped() match {
